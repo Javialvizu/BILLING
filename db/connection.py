@@ -10,5 +10,3 @@ def get_connection():
         service_name="XEPDB1"
 
     )
-
-print(get_connection)
