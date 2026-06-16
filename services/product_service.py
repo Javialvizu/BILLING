@@ -7,7 +7,7 @@ def get_products():
     cursor = connection.cursor()
 
     cursor.execute("""
-            SELECT * FROM PRODUCTO
+            SELECT * FROM PRODUCT
                    """)
     
     products = cursor.fetchall()

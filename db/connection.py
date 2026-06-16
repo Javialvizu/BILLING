@@ -3,7 +3,7 @@ import oracledb
 def get_connection():
      
     return oracledb.connect(
-        user="TAREAS",
+        user="BILLING_DB",
         password="Javialvizu77",
         host="192.168.1.135",
         port=1521,
