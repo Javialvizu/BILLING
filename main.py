@@ -1,6 +1,13 @@
-from services.product_service import get_products
+"""from services.product_service import get_products
 
 products = get_products()
 
 for product in products:
-    print(product)
+    print(product)"""
+
+from analytics.sales_analysis import sales_by_product
+
+data = sales_by_product()
+
+for row in data:
+    print(row)
