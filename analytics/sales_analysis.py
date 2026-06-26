@@ -1,26 +1,33 @@
-from db.connection import get_connection
 import pandas as pd
+from db.connection import get_connection
 
 def sales_by_product():
+
     connection = get_connection()
 
     cursor = connection.cursor()
 
     cursor.execute("""
-                SELECT 
-                   p.PRODUCT_NAME,
-                   SUM(d.QUANTITY) AS TOTAL_SOLD
-                FROM PRODUCT p
-                JOIN INVOICE_DETAIL d
-                ON p.PRODUCT_ID = d.PRODUCT_ID
-                GROUP BY p.PRODUCT_NAME
-                   
-                   """)
-    
-    results = cursor.fetchall()
+        SELECT
+            p.product_name,
+            SUM(d.quantity) AS total_sold
+        FROM product p
+        JOIN invoice_detail d
+            ON p.product_id = d.product_id
+        GROUP BY p.product_name
+    """)
+
+    df = pd.DataFrame(
+        cursor.fetchall(),
+        columns=[column[0] for column in cursor.description]
+    )
+
+    df.to_csv(
+        "reports/products.csv",
+        index=False
+    )
 
     cursor.close()
     connection.close()
 
-    return results
-
+    return df
